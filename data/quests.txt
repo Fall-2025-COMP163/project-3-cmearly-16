@@ -1,0 +1,56 @@
+QUEST_ID: first_steps
+TITLE: First Steps
+DESCRIPTION: Begin your adventure by defeating your first enemy
+REWARD_XP: 50
+REWARD_GOLD: 25
+REQUIRED_LEVEL: 1
+PREREQUISITE: NONE
+
+QUEST_ID: goblin_hunter
+TITLE: Goblin Hunter
+DESCRIPTION: The village is being terrorized by goblins. Defeat 3 goblins to protect the townsfolk.
+REWARD_XP: 100
+REWARD_GOLD: 75
+REQUIRED_LEVEL: 2
+PREREQUISITE: first_steps
+
+QUEST_ID: equipment_upgrade
+TITLE: Better Equipment
+DESCRIPTION: Visit the shop and purchase your first weapon or armor
+REWARD_XP: 75
+REWARD_GOLD: 50
+REQUIRED_LEVEL: 2
+PREREQUISITE: first_steps
+
+QUEST_ID: orc_menace
+TITLE: The Orc Menace
+DESCRIPTION: A band of orcs has been spotted near the forest. Defeat them to earn the village's gratitude.
+REWARD_XP: 200
+REWARD_GOLD: 150
+REQUIRED_LEVEL: 3
+PREREQUISITE: goblin_hunter
+
+QUEST_ID: dragon_slayer
+TITLE: Dragon Slayer
+DESCRIPTION: A fearsome dragon threatens the kingdom. Only the bravest heroes dare face this challenge.
+REWARD_XP: 500
+REWARD_GOLD: 500
+REQUIRED_LEVEL: 6
+PREREQUISITE: orc_menace
+
+QUEST_ID: treasure_hunter
+TITLE: Treasure Hunter
+DESCRIPTION: Explore and collect 5 different items for your collection
+REWARD_XP: 150
+REWARD_GOLD: 100
+REQUIRED_LEVEL: 3
+PREREQUISITE: equipment_upgrade
+
+QUEST_ID: master_adventurer
+TITLE: Master Adventurer
+DESCRIPTION: Reach level 10 to prove yourself as a true adventurer
+REWARD_XP: 1000
+REWARD_GOLD: 1000
+REQUIRED_LEVEL: 10
+PREREQUISITE: dragon_slayer
+
