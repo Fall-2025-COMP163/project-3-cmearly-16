@@ -310,5 +310,9 @@ def rogue_critical_strike(character, enemy):
         character["ability_cooldown"] = 2
         return f"{character.get('name')} lands a CRITICAL STRIKE for {damage} damage!"
     else:
-        # Failed crit: do normal strength damage
-        damage = character.get("strength", 0) - (enemy.get("strength"
+        # Failed crit: normal damage
+        damage = character.get("strength", 0) - (enemy.get("strength", 0) // 4)
+        damage = max(1, int(damage))
+        enemy["health"] = max(0, enemy.get("health", 0) - damage)
+        character["ability_cooldown"] = 2
+        return f"{character.get('name')} attempts a critical strike but hits normally for {damage} damage."
