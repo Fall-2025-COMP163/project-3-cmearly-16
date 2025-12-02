@@ -316,3 +316,9 @@ def rogue_critical_strike(character, enemy):
         enemy["health"] = max(0, enemy.get("health", 0) - damage)
         character["ability_cooldown"] = 2
         return f"{character.get('name')} attempts a critical strike but hits normally for {damage} damage."
+
+def get_victory_rewards(enemy):
+    return {
+        "xp": enemy.get("xp_reward", 0),
+        "gold": enemy.get("gold_reward", 0)
+    }

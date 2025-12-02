@@ -71,10 +71,6 @@ def save_character(character, save_directory="data/save_games"):
         # Let PermissionError and IOError naturally propagate
         raise e
 def load_character(character_name, save_directory="data/save_games"):
-
-    """
-    Load a character from file
-    """
     filename = os.path.join(save_directory, f"{character_name}_save.txt")
     if not os.path.exists(filename):
         raise CharacterNotFoundError(f"No save file found for: {character_name}")
@@ -83,22 +79,38 @@ def load_character(character_name, save_directory="data/save_games"):
             lines = file.readlines()
     except Exception:
         raise SaveFileCorruptedError("Save file exists but could not be read")
+
     character = {}
     try:
         for line in lines:
-            key, value = line.strip().split(": ")
+            line = line.strip()
+            if not line or ": " not in line:
+                continue
+            key, value = [x.strip() for x in line.split(": ", 1)]
+            key = key.lower()
 
-            if key in ("LEVEL", "HEALTH", "MAX_HEALTH", "STRENGTH",
-                       "MAGIC", "EXPERIENCE", "GOLD"):
-                character[key.lower()] = int(value)
-            elif key in ("INVENTORY", "ACTIVE_QUESTS", "COMPLETED_QUESTS"):
-                character[key.lower()] = value.split(",") if value else []
+            if key in ("level", "health", "max_health", "strength", "magic", "experience", "gold"):
+                character[key] = int(value)
+            elif key in ("inventory", "active_quests", "completed_quests"):
+                character[key] = value.split(",") if value else []
             else:
-                character[key.lower()] = value
+                character[key] = value
     except Exception:
         raise InvalidSaveDataError("Data in save file is formatted incorrectly")
+
+    # Fill missing fields with defaults
+    defaults = {
+        "inventory": [],
+        "active_quests": [],
+        "completed_quests": []
+    }
+    for key, default in defaults.items():
+        if key not in character:
+            character[key] = default
+
     validate_character_data(character)
     return character
+
 def list_saved_characters(save_directory="data/save_games"):
 
     """
